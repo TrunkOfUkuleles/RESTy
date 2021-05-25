@@ -1,0 +1,23 @@
+
+form{
+    border: 2px solid white;
+    display: grid;
+    width: 100%;
+  }
+    .button-box{
+        display:flex;
+        justify-content: space-evenly;
+        border: 2px solid white;
+        width: 100%;
+    }
+
+    .results{
+        width: 100%;
+        border: 2px solid red;
+        justify-content: center;
+    }
+
+    .inp-field{
+        width:100%;
+        border: 2px solid white;
+    }

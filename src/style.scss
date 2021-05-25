@@ -3,10 +3,14 @@ $bgColor: orange;
 
 body {
   background: $bgColor;
+  display:grid;
+  justify-content: center;
+  height: 100vh;
+}
 
-  header {
-    h1 {
-      color: blue;
-    }
-  }
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
 }

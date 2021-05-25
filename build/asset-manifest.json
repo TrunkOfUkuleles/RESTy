@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/TrunkOfUkuleles/RESTystatic/css/main.289307c8.chunk.css",
+    "main.js": "/TrunkOfUkuleles/RESTystatic/js/main.fa79d8a7.chunk.js",
+    "main.js.map": "/TrunkOfUkuleles/RESTystatic/js/main.fa79d8a7.chunk.js.map",
+    "runtime-main.js": "/TrunkOfUkuleles/RESTystatic/js/runtime-main.0a6dab53.js",
+    "runtime-main.js.map": "/TrunkOfUkuleles/RESTystatic/js/runtime-main.0a6dab53.js.map",
+    "static/js/2.6635593e.chunk.js": "/TrunkOfUkuleles/RESTystatic/js/2.6635593e.chunk.js",
+    "static/js/2.6635593e.chunk.js.map": "/TrunkOfUkuleles/RESTystatic/js/2.6635593e.chunk.js.map",
+    "index.html": "/TrunkOfUkuleles/RESTyindex.html",
+    "static/css/main.289307c8.chunk.css.map": "/TrunkOfUkuleles/RESTystatic/css/main.289307c8.chunk.css.map",
+    "static/js/2.6635593e.chunk.js.LICENSE.txt": "/TrunkOfUkuleles/RESTystatic/js/2.6635593e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0a6dab53.js",
+    "static/js/2.6635593e.chunk.js",
+    "static/css/main.289307c8.chunk.css",
+    "static/js/main.fa79d8a7.chunk.js"
+  ]
+}
