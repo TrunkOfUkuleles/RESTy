@@ -1,6 +1,12 @@
 
-    .results{
-        width: 100%;
+
+    .result-box{
+        background: white;  
+        max-width: 70ch;
         border: 2px solid red;
         justify-content: center;
+        p{
+            padding: auto;
+            justify-self: center;
+        }
     }

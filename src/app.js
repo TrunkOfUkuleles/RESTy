@@ -13,22 +13,22 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-        url:'https://',
+        url:'https://swapi.dev/api/people/',
         mode:'',
-        result:'',
+        result:[],
         count:0,
     }
 }
 
 handleChange = (e, mod) => {
   e.preventDefault();
-  this.setState({mode: `${mod}`,
-                  result: `${mod}`})
+  this.setState({mode: `${mod}`})
   console.log(this.state)
 }
 
 handleType = (e) => {
   this.setState({url: e.target.value})
+  console.log(this.state)
 }
 
 handleSub = async (e) => {
@@ -37,7 +37,9 @@ handleSub = async (e) => {
   let rez = await fetch(`${this.state.url}`)
   let data = await rez.json();
   console.log("SUB: ", data)
-  this.setState({result: `${data}`})
+  let hold = JSON.stringify(data.results, undefined, 3)
+  // console.log(hold.map(el=> <br>{el}</br>))
+  this.setState({result: hold})
 }
 
 
