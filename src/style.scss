@@ -13,4 +13,10 @@ body {
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
+
+}
+
+.middle-box{
+  display: flex;
+  max-width: 70ch;
 }

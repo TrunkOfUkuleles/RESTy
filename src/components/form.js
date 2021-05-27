@@ -10,6 +10,7 @@ class Form extends React.Component {
         <form>
             <input type='text' placeholder="Address" onChange={e=> this.props.handleType(e)} value={this.props.url} />
             <button type='submit' onClick={e=>this.props.sub(e)}>submit</button>
+            <button type='submit' onClick={e=>this.props.handleMode(e)}>GO</button>
         </form>
 
         <div className="button-box">
