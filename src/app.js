@@ -48,28 +48,25 @@ swissArmy = async(e) => {
   this.setLoader();
   if (this.state.mode === "GET"){
     this.setState({history: [ ...this.state.history, `${this.state.url}:${this.state.mode}:${this.state.body}`]})
-    console.log("GETTING")
-    let result = await superagent.get(`${this.state.url}`).then(el =>{
-
-      let rez = el.text.data
-      return rez
+    let result;
+    await superagent.get(`${this.state.url}`).then(res=>{
+      result = JSON.stringify(res.body)
     })
-    console.log("GOTTED?: ", result)
     this.setState({result: result})
-    console.log("GETSTATE: ", this.state)
+    console.log("GETSTATE: ", result, this.state)
   }else if (this.state.mode === "POST"){
     console.log("POSTING")
-    let result = await superagent.POST(`${this.state.url}`).send(JSON.stringify(this.state.body)).then(el =>{
-      return el.json()
-    })
-    console.log(result)
-    this.setState({result})
-    this.setLoader();
+    let result = await superagent.post(`${this.state.url}`).send(JSON.stringify(this.state.body))
+    this.setState({result: result.body})
   }else if(this.state.mode === "PUT"){
     console.log("PUTTING")
-    let result = await superagent.POST(`${this.state.url}`).send(JSON.stringify(this.state.body)).then(el =>{
-      return el.json()
+    let result;
+    await superagent.put(`${this.state.url}`).send(JSON.stringify(this.state.body)).then(el=>{
+
+    }).catch(err => {
+     console.log(err.message)
     })
+    this.setState({ result: result.body.data})
     console.log(result)
     this.setState({result})
   }
@@ -105,8 +102,8 @@ redo = (e) => {
         <Form handleMode={this.swissArmy} handleQ={this.handleQ} body={this.state.body} modeChange={this.handleChange} sub={this.handleSub} 
         handleType={this.handleType} url={this.state.url} mode={this.state.mode} loading={this.state.loading} setLoad={this.setLoader}/>
         <div className="middle-box">
-        <History redo={this.redo} handleRedo={this.redo} hidden={this.state.history.length>0}>{this.state.history}</History>
-        <Result  result={this.state.result}  loading={this.state.loading} setLoad={this.setLoader} rez={this.state.result} hidden={this.state.result.length>0} >{this.state.result}</Result>
+        <History redo={this.redo} handleRedo={this.redo} >{this.state.history}</History>
+        <Result  result={this.state.result}  loading={this.state.loading} setLoad={this.setLoader} rez={this.state.result}>{this.state.result}</Result>
         </div>
     <Footer />
     </>

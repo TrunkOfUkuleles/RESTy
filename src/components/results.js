@@ -9,7 +9,7 @@ class Result extends React.Component {
         return (
             <div className='result-box'>  
                 {
-                this.props.rez
+                JSON.stringify(this.props.rez)
                 }
                 
                 
