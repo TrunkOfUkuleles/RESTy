@@ -14,10 +14,10 @@ class Form extends React.Component {
         </form>
 
         <div className="button-box">
-            <button  onFocus={this.props.mode === 'GET'} onClick={e=> {this.props.modeChange(e, 'GET')}}>GET</button>
-            <button  onClick={e=> {this.props.modeChange(e, 'POST')}}>POST</button>
-            <button  onClick={e=> {this.props.modeChange(e, 'PUT')}}>PUT</button>
-            <button  onClick={e=> {this.props.modeChange(e, 'DELETE')}}>DELETE</button>
+            <button  className={this.props.mode==="GET" ? "selected" : "button"} onClick={e=> {this.props.modeChange(e, 'GET')}}>GET</button>
+            <button  className={this.props.mode==="POST" ? "selected" : "button"} onClick={e=> {this.props.modeChange(e, 'POST')}}>POST</button>
+            <button  className={this.props.mode==="PUT" ? "selected" : "button"} onClick={e=> {this.props.modeChange(e, 'PUT')}}>PUT</button>
+            <button  className={this.props.mode==="DELETE" ? "selected" : "button"} onClick={e=> {this.props.modeChange(e, 'DELETE')}}>DELETE</button>
         </div>
             
             {(this.props.mode === "PUT" || this.props.mode === "POST") && 
