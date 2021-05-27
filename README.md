@@ -1,20 +1,19 @@
 ### LAB - Class 26
 
-## Project: RESTy phase 2
+## Project: RESTy phase 3
 ## Auth: Julien Edwards
 
 ### Links and Resources
 
 
-## 27
+## 28
 
-- [github](https://github.com/TrunkOfUkuleles/RESTy/tree/props-and-state)
+- [github](https://github.com/TrunkOfUkuleles/RESTy/tree/composition)
 
 
 ### Setup
 
-create a front end using react to house selectors for 4 db methods, along with a stateful input for html (and JSON body type query), and a section for responses.
-add fetch functionality and state management to display results
+set up the fetch and display logic so you can query an api
 
 #### How to initialize/run your application (where applicable)
 
@@ -29,3 +28,6 @@ N/A
 
 27
 ![lab-UML](/assets/lab27UML.jpg)
+
+28
+![lab-UML](/assets/lab28UML.jpg)
