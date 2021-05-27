@@ -50,7 +50,7 @@ swissArmy = async(e) => {
     await superagent.get(`${this.state.url}`).then(res=>{
       result = res.body.data
     })
-    this.setState({result: result})
+    this.setState({result: JSON.stringify(result, undefined, 2)})
     console.log("GETSTATE: ", result, JSON.stringify(result, undefined, 2))
   }else if (this.state.mode === "POST"){
     console.log("POSTING")
