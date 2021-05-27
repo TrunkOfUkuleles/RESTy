@@ -19,7 +19,8 @@ class Form extends React.Component {
             <button  onClick={e=> {this.props.modeChange(e, 'DELETE')}}>DELETE</button>
         </div>
             
-            {(this.props.mode === "PUT" || this.props.mode === "POST") && <textarea className='inp-field' />}
+            {(this.props.mode === "PUT" || this.props.mode === "POST") && 
+            <textarea className='inp-field' onChange={e=>this.props.handleQ(e)} value={this.props.body} />}
          </div>
        </>
     )}

@@ -8,7 +8,6 @@ class Result extends React.Component {
     render(){
         return (
             <div className='result-box'>  
-                <p>{this.props.count}</p>
                 {this.props.result.length>0 &&
                 this.props.result
                 }
