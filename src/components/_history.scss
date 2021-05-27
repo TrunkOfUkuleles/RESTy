@@ -2,5 +2,11 @@
 .history-box{
     background: white;
     border:2px solid red;
-    min-width: 20ch;
+    overflow: scroll;
+    display: grid;
+
+    h2{
+        justify-self: center;
+        font-style: italic;
+    }
 }

@@ -16,7 +16,7 @@ class App extends React.Component {
     this.state = {
         url:'https://reqres.in/api/users/2',
         mode:'GET',
-        result:[{id:2,email:"janet.weaver@reqres.in",first_name:"Janet",last_name:"Weaver",support:{url:"https://reqres.in/#support-heading"}}],
+        result:[],
         history:[],
         body:'{ }',
         loading: false,
@@ -26,7 +26,6 @@ class App extends React.Component {
 handleChange = (e, mod) => {
   e.preventDefault();
   this.setState({mode: `${mod}`})
-  console.log(this.state)
 }
 
 setLoader = () =>{
@@ -36,7 +35,6 @@ setLoader = () =>{
 
 handleType = (e) => {
   this.setState({url: e.target.value})
-  console.log(this.state)
 }
 
 handleQ = (e) => {
@@ -50,29 +48,35 @@ swissArmy = async(e) => {
     this.setState({history: [ ...this.state.history, `${this.state.url}:${this.state.mode}:${this.state.body}`]})
     let result;
     await superagent.get(`${this.state.url}`).then(res=>{
-      result = JSON.stringify(res.body)
+      result = res.body.data
     })
     this.setState({result: result})
-    console.log("GETSTATE: ", result, this.state)
+    console.log("GETSTATE: ", result, JSON.stringify(result, undefined, 2))
   }else if (this.state.mode === "POST"){
     console.log("POSTING")
-    let result = await superagent.post(`${this.state.url}`).send(JSON.stringify(this.state.body))
-    this.setState({result: result.body})
+    let result;
+    await superagent.post(`${this.state.url}`).send(JSON.stringify(this.state.body)).then(res=>{
+      result = res.body.data
+        })
+    this.setState({result: result})
   }else if(this.state.mode === "PUT"){
     console.log("PUTTING")
     let result;
-    await superagent.put(`${this.state.url}`).send(JSON.stringify(this.state.body)).then(el=>{
-
+    await superagent.put(`${this.state.url}`).send(JSON.stringify(this.state.body)).then(res=>{
+      result = res.body.data
     }).catch(err => {
      console.log(err.message)
     })
-    this.setState({ result: result.body.data})
+    this.setState({ result: result})
     console.log(result)
     this.setState({result})
   }
-  // else if(this.state.mode === "DELETE"){
-
-  // }
+  else if(this.state.mode === "DELETE"){
+    this.setState({history: [ ...this.state.history, `${this.state.url}:${this.state.mode}:${this.state.body}`]})
+    await superagent.delete(`${this.state.url}`).send(this.state.body).then(res=>{
+      result = res.body.data
+    }).catch(err = conole.log(err))
+  }
 }
 
 handleSub = async (e) => {
@@ -89,9 +93,8 @@ handleSub = async (e) => {
 
 redo = (e) => {
   e.preventDefault();
-  let set = e.target.value.split(':')
-  console.log("SET REDO: ", set)
-  this.setState({url: set[0]+":"+set[1], body: set[3], mode: set[0]})
+  console.log("SET REDO: ", e.target)
+  this.setState({url: e.target.href, body: e.target.bod, mode: e.target.mode})
 }
 
 

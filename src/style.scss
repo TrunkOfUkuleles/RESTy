@@ -13,10 +13,11 @@ body {
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
-
+  width:75ch;
 }
 
 .middle-box{
-  display: flex;
-  max-width: 70ch;
+  display: grid;
+  max-width: 100%;
+  
 }

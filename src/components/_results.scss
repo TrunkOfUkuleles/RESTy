@@ -2,9 +2,9 @@
 
     .result-box{
         background: white;  
-        max-width: 70ch;
         border: 2px solid red;
         justify-content: center;
+        overflow: scroll;
         p{
             padding: auto;
             justify-self: center;

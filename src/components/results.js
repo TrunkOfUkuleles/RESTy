@@ -1,19 +1,21 @@
 import React from 'react';
-import './results.scss'
-// import Person from './person'
+import './_results.scss'
+import { If, Then } from 'react-if';
 
 class Result extends React.Component {
 
 
     render(){
         return (
-            <div className='result-box'>  
-                {
-                JSON.stringify(this.props.rez)
-                }
-                
-                
-           </div>
+              
+            <If condition={this.props.rez.length !== undefined && this.props.rez.length}>
+                <Then>
+                <div className='result-box'>
+                {JSON.stringify(this.props.rez, undefined, 1)}
+                </div>
+                </Then>
+            </If>
+           
         )}
 }
 

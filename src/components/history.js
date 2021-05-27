@@ -1,6 +1,6 @@
 import React from 'react';
 import './_history.scss'
-// import Childer from './story'
+import { If, Then } from 'react-if';
 
 class History extends React.Component{
         
@@ -9,20 +9,28 @@ class History extends React.Component{
     render(){
     let test = this.props.history
         return(
-            
+            <>
+            <If condition={this.props.children.length != undefined && this.props.children.length > 0}>
+             <Then>
             <div className="history-box">
             <h2>Search History</h2>
             <ol className="history-list" >
-            {/* {test.forEach(el =>{
+            {this.props.children.map(el=>{
                 let stuffs = el.split(':')
-                return (<li key={el}><a href={stuffs[0]+":"+stuffs[1]} bod={stuffs[3]} mode={stuffs[2]} onClick={e => this.props.redo(e)}>{stuffs[0]+":"+stuffs[1]}</a></li>)
-            }
-            
-            )} */}
-            {this.props.children}
+                return <li key={el}><a href={stuffs[0]+":"+stuffs[1]} bod={stuffs[3]} 
+                mode={stuffs[2]} onClick={e => this.props.redo(e)}>{stuffs[0]+":"+stuffs[1]}</a></li>
+            })}
             </ol>
             </div>
-            
+                </Then>
+
+            </If>
+            <If condition={this.props.loading}>
+                <Then>
+                    "LOADING"
+                </Then>
+            </If>
+            </>
         )
     }
 }
