@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@testing-library/react": "^11.2.7",
+    "cors": "^2.8.5",
     "handlebars": "^4.7.7",
     "jquery": "^3.6.0",
     "loaders.css": "^0.1.2",

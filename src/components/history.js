@@ -9,6 +9,7 @@ class History extends React.Component{
 
     render(){
     let test = this.props.history
+    console.log(test)
         return(
             <>
             <If condition={this.props.children.length != undefined && this.props.children.length > 0}>
@@ -18,8 +19,8 @@ class History extends React.Component{
             <ol className="history-list" >
             {this.props.children.map(el=>{
                 let stuffs = el.split(':')
-                return <li key={el}><Link to={{ pathname: "/" }} linq={stuffs[0]+":"+stuffs[1]} bod={stuffs[3]} 
-                mode={stuffs[2]} onClick={e => this.props.redo(e)}>{stuffs[0]+":"+stuffs[1]}</Link></li>
+                return <li key={el}><Link onClick={e => this.props.redo(e)} to={{ pathname: "/" }} linq={stuffs[0]+":"+stuffs[1]} bod={stuffs[3]} 
+                mode={stuffs[2]} >{stuffs[0]+":"+stuffs[1]}</Link></li>
             })}
             </ol>
             </div>

@@ -4,15 +4,23 @@ import { If, Then } from 'react-if';
 
 class Result extends React.Component {
 
-
     render(){
+        console.log(`RESULT:${this.props.result}`)
         return (
               <>
-            <If condition={this.props.result[0]}>
+              <If condtion={this.props.loading}>
+                  <Then>
+                  <div class="loader-inner ball-pulse" >
+                      <div />
+                      <div />
+                      <div />
+                  </div>
+                  </Then>
+              </If>
+            <If condition={this.props.result.length}>
                 <Then>
                 <div className='result-box'>
-                    {/* {JSON.parse(this.props.result)} */}
-                {this.props.result}
+                {this.props.result[0]}
                 </div>
                 </Then>
             </If>

@@ -19,7 +19,10 @@ class App extends React.Component {
         mode:'GET',
         result:[],
         history:[],
-        body:'{ }',
+        body:`{
+          "name": "morpheus",
+          "job": "leader"
+      }`,
         loading: false,
     }
 }
@@ -44,54 +47,72 @@ handleQ = (e) => {
 }
 
 swissArmy = async(e) => {
+
   e.preventDefault();
   this.setLoader();
+
   if (this.state.mode === "GET"){
     this.setState({history: [ ...this.state.history, `${this.state.url}:${this.state.mode}:${this.state.body}`]})
     let result;
     await superagent.get(`${this.state.url}`).then(res=>{
       result = res.body.data
-    })
-    this.setState({result: JSON.stringify(result, undefined, 2)})
-    console.log("GETSTATE: ", result, JSON.stringify(result, undefined, 2))
+      this.setLoader();
+    }).catch(err => {
+      console.log(err.message)
+     })
+    this.setState({result: [JSON.stringify(result, undefined, 2)]})
+    console.log("GET", this.state)
   }else if (this.state.mode === "POST"){
     console.log("POSTING")
     this.setState({history: [ ...this.state.history, `${this.state.url}:${this.state.mode}:${this.state.body}`]})
     let result;
-    await superagent.post(`${this.state.url}`).send(JSON.stringify(this.state.body)).then(res=>{
-      result = res.body.data
+    await superagent.post(`${this.state.url}`).send(this.state.body).then(res=>{
+      result = res.body
+      console.log("IN POST: ", res.body)
+
         }).catch(err => {
           console.log(err.message)
+          this
          })
         
-    this.setState({result: result})
-    console.log("post post: ", result)
+    this.setState({result: [JSON.stringify(result, undefined, 2)]})
+    console.log("post post: ", result, JSON.stringify(result, undefined, 2))
+    console.log(this.state.result)
+    this.setLoader();
   }else if(this.state.mode === "PUT"){
     this.setState({history: [ ...this.state.history, `${this.state.url}:${this.state.mode}:${this.state.body}`]})
     console.log("PUTTING")
     let result;
     await superagent.put(`${this.state.url}`).send(this.state.body).then(res=>{
-      result = res.body.data
+      result = res.body
+      console.log("IN PUT: ", res.body)
     }).catch(err => {
      console.log(err.message)
+     this.setState({result: err.message})
     })
-    this.setState({ result: result})
-    console.log(result)
+    this.setState({ result: [JSON.stringify(result, undefined, 2)]})
+    // console.log(result)
     // this.setState({result})
+    console.log("post PUT: ", result, this.state)
+    this.setLoader();
   }
   else if(this.state.mode === "DELETE"){
     this.setState({history: [ ...this.state.history, `${this.state.url}:${this.state.mode}:${this.state.body}`]})
+    let result;
     await superagent.delete(`${this.state.url}`).send(this.state.body).then(res=>{
-      result = res.body.data
-    }).catch(err = conole.log(err))
+      result = "Deleted"
+    }).catch(err => {this.setState({result: err.message})})
+    this.setState({result})
+    console.log("post DELETE: ", result, this.state)
+    this.setLoader();
   }
 }
 
 redo = (e) => {
-  e.preventDefault();
+  // e.preventDefault();
   console.log("SET REDO: ", e.target)
   this.setState({url: e.target.linq, body: e.target.bod, mode: e.target.mode})
-  this.props.history.push("/")
+
 
 }
 
