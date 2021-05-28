@@ -18,7 +18,7 @@ class History extends React.Component{
             <ol className="history-list" >
             {this.props.children.map(el=>{
                 let stuffs = el.split(':')
-                return <li key={el}><Link href="/" linq={stuffs[0]+":"+stuffs[1]} bod={stuffs[3]} 
+                return <li key={el}><Link to={{ pathname: "/" }} linq={stuffs[0]+":"+stuffs[1]} bod={stuffs[3]} 
                 mode={stuffs[2]} onClick={e => this.props.redo(e)}>{stuffs[0]+":"+stuffs[1]}</Link></li>
             })}
             </ol>

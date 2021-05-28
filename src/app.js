@@ -7,7 +7,7 @@ import Header from './components/header';
 import Main from './components/main.js';
 import superagent from 'superagent';
 import { BrowserRouter } from 'react-router-dom';
-import { useHistory } from 'react-router'
+// import { useHistory } from 'react-router'
 
 class App extends React.Component {
 
@@ -23,7 +23,7 @@ class App extends React.Component {
         loading: false,
     }
 }
-history = () => useHistory
+// history = () => useHistory
 
 handleChange = (e, mod) => {
   e.preventDefault();
@@ -91,7 +91,8 @@ redo = (e) => {
   e.preventDefault();
   console.log("SET REDO: ", e.target)
   this.setState({url: e.target.linq, body: e.target.bod, mode: e.target.mode})
-  this.history.nav('/')
+  this.props.history.push("/")
+
 }
 
 
