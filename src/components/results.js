@@ -7,15 +7,16 @@ class Result extends React.Component {
 
     render(){
         return (
-              
-            <If condition={this.props.rez.length !== undefined && this.props.rez.length}>
+              <>
+            <If condition={this.props.result[0]}>
                 <Then>
                 <div className='result-box'>
-                {JSON.stringify(this.props.rez, undefined, 1)}
+                    {/* {JSON.parse(this.props.result)} */}
+                {this.props.result}
                 </div>
                 </Then>
             </If>
-           
+           </>
         )}
 }
 

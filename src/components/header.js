@@ -1,5 +1,6 @@
 import React from 'react';
 import './_header.scss'
+import { Link, NavLink } from 'react-router-dom';
 
 
 class  Header extends React.Component{
@@ -10,8 +11,15 @@ class  Header extends React.Component{
             <h1>RESTy</h1>
             <nav>
                 <ul>
-                    <li>home</li>
-                    <li>about</li>
+                    <li> 
+                        <Link to="/">Home</Link>
+                    </li>
+                    <li>
+                        <NavLink to="/history">History</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/help">Help</NavLink>
+                    </li>
                 </ul>
             </nav>
         </header>

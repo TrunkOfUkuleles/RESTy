@@ -4,12 +4,13 @@ import React from 'react';
 import './style.scss';
 import Footer from './components/footer';
 import Header from './components/header';
-import Form from './components/form';
-import Result from './components/results';
-import History from './components/history';
+import Main from './components/main.js';
 import superagent from 'superagent';
+import { BrowserRouter } from 'react-router-dom';
+import { useHistory } from 'react-router'
 
 class App extends React.Component {
+
 
   constructor(props){
     super(props);
@@ -22,6 +23,7 @@ class App extends React.Component {
         loading: false,
     }
 }
+history = () => useHistory
 
 handleChange = (e, mod) => {
   e.preventDefault();
@@ -54,22 +56,28 @@ swissArmy = async(e) => {
     console.log("GETSTATE: ", result, JSON.stringify(result, undefined, 2))
   }else if (this.state.mode === "POST"){
     console.log("POSTING")
+    this.setState({history: [ ...this.state.history, `${this.state.url}:${this.state.mode}:${this.state.body}`]})
     let result;
     await superagent.post(`${this.state.url}`).send(JSON.stringify(this.state.body)).then(res=>{
       result = res.body.data
-        })
+        }).catch(err => {
+          console.log(err.message)
+         })
+        
     this.setState({result: result})
+    console.log("post post: ", result)
   }else if(this.state.mode === "PUT"){
+    this.setState({history: [ ...this.state.history, `${this.state.url}:${this.state.mode}:${this.state.body}`]})
     console.log("PUTTING")
     let result;
-    await superagent.put(`${this.state.url}`).send(JSON.stringify(this.state.body)).then(res=>{
+    await superagent.put(`${this.state.url}`).send(this.state.body).then(res=>{
       result = res.body.data
     }).catch(err => {
      console.log(err.message)
     })
     this.setState({ result: result})
     console.log(result)
-    this.setState({result})
+    // this.setState({result})
   }
   else if(this.state.mode === "DELETE"){
     this.setState({history: [ ...this.state.history, `${this.state.url}:${this.state.mode}:${this.state.body}`]})
@@ -79,36 +87,23 @@ swissArmy = async(e) => {
   }
 }
 
-handleSub = async (e) => {
-  e.preventDefault();
-  this.setState({history: [ ...this.state.history, `${this.state.url}:${this.state.mode}:${this.state.body}`]})
-  let rez = await fetch(`${this.state.url}`)
-  let data = await rez.json();
-  console.log("SUB: ", data.data)
-  let hold = JSON.stringify(data.results, undefined, 3)
-  let go = JSON.stringify(data)
-  console.log("GO? ",go.data)
-  this.setState({result: hold})
-}
-
 redo = (e) => {
   e.preventDefault();
   console.log("SET REDO: ", e.target)
-  this.setState({url: e.target.href, body: e.target.bod, mode: e.target.mode})
+  this.setState({url: e.target.linq, body: e.target.bod, mode: e.target.mode})
+  this.history.nav('/')
 }
 
 
     render(){
   return (
       <>
+      <BrowserRouter>
     <Header />
-        <Form handleMode={this.swissArmy} handleQ={this.handleQ} body={this.state.body} modeChange={this.handleChange} sub={this.handleSub} 
-        handleType={this.handleType} url={this.state.url} mode={this.state.mode} loading={this.state.loading} setLoad={this.setLoader}/>
-        <div className="middle-box">
-        <History redo={this.redo} handleRedo={this.redo} >{this.state.history}</History>
-        <Result  result={this.state.result}  loading={this.state.loading} setLoad={this.setLoader} rez={this.state.result}>{this.state.result}</Result>
-        </div>
+    <Main handleMode={this.swissArmy} handleQ={this.handleQ} body={this.state.body} modeChange={this.handleChange} result={this.state.result} history={this.state.history}
+        handleType={this.handleType} url={this.state.url} mode={this.state.mode} loading={this.state.loading} setLoad={this.setLoader} redo={this.redo} />
     <Footer />
+    </BrowserRouter>
     </>
   );
 }}

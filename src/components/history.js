@@ -1,6 +1,7 @@
 import React from 'react';
 import './_history.scss'
 import { If, Then } from 'react-if';
+import { Link } from 'react-router-dom';
 
 class History extends React.Component{
         
@@ -17,8 +18,8 @@ class History extends React.Component{
             <ol className="history-list" >
             {this.props.children.map(el=>{
                 let stuffs = el.split(':')
-                return <li key={el}><a href={stuffs[0]+":"+stuffs[1]} bod={stuffs[3]} 
-                mode={stuffs[2]} onClick={e => this.props.redo(e)}>{stuffs[0]+":"+stuffs[1]}</a></li>
+                return <li key={el}><Link href="/" linq={stuffs[0]+":"+stuffs[1]} bod={stuffs[3]} 
+                mode={stuffs[2]} onClick={e => this.props.redo(e)}>{stuffs[0]+":"+stuffs[1]}</Link></li>
             })}
             </ol>
             </div>
