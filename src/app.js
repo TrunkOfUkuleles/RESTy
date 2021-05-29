@@ -35,7 +35,10 @@ handleChange = (e, mod) => {
 
 setLoader = () =>{
   // e.preventDefault();
+  console.log("SET LOADER FIRED!!!!: ")
   this.setState({loading: !this.state.loading})
+
+
 }
 
 handleType = (e) => {
@@ -54,7 +57,7 @@ swissArmy = async(e) => {
   if (this.state.mode === "GET"){
     this.setState({history: [ ...this.state.history, `${this.state.url}:${this.state.mode}:${this.state.body}`]})
     let result;
-    await superagent.get(`${this.state.url}`).then(res=>{
+     await superagent.get(`${this.state.url}`).then(res=>{
       result = res.body.data
       this.setLoader();
     }).catch(err => {
