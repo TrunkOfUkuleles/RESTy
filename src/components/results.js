@@ -10,10 +10,14 @@ class Result extends React.Component {
               <>
               <If condtion={this.props.loading}>
                   <Then>
-                  <div class="loader-inner ball-pulse" >
+                      <div className="loaders">
+                  <div class="loader" >
+                      <div className="ball-pulse">
                       <div />
                       <div />
                       <div />
+                      </div>
+                  </div>
                   </div>
                   </Then>
               </If>
