@@ -13,5 +13,10 @@
         .ball-pulse > div {
             background-color: green;
           }
+        
+        .loader-small .loader-inner {
+            transform: scale(0.5, 0.5);
+          }
+
           
     }

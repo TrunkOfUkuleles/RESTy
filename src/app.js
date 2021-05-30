@@ -103,7 +103,7 @@ swissArmy = async(e) => {
     this.setState({history: [ ...this.state.history, `${this.state.url}:${this.state.mode}:${this.state.body}`]})
     let result;
     await superagent.delete(`${this.state.url}`).send(this.state.body).then(res=>{
-      result = "Deleted"
+      result = ["Deleted"]
     }).catch(err => {this.setState({result: err.message})})
     this.setState({result})
     console.log("post DELETE: ", result, this.state)
