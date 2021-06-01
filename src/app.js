@@ -35,7 +35,7 @@ handleChange = (e, mod) => {
 
 setLoader = () =>{
   // e.preventDefault();
-  console.log("SET LOADER FIRED!!!!: ")
+  console.log("SET LOADER FIRED!!!!: loading ", this.state.loading)
   this.setState({loading: !this.state.loading})
 
 
@@ -55,7 +55,7 @@ swissArmy = async(e) => {
   this.setLoader();
 
   if (this.state.mode === "GET"){
-    this.setState({history: [ ...this.state.history, `${this.state.url}:${this.state.mode}:${this.state.body}`]})
+    this.setState({history: [ ...this.state.history, `${this.state.url}*${this.state.mode}*${this.state.body}`]})
     let result;
      await superagent.get(`${this.state.url}`).then(res=>{
       result = res.body.data
@@ -67,7 +67,7 @@ swissArmy = async(e) => {
     console.log("GET", this.state)
   }else if (this.state.mode === "POST"){
     console.log("POSTING")
-    this.setState({history: [ ...this.state.history, `${this.state.url}:${this.state.mode}:${this.state.body}`]})
+    this.setState({history: [ ...this.state.history, `${this.state.url}*${this.state.mode}*${this.state.body}`]})
     let result;
     await superagent.post(`${this.state.url}`).send(this.state.body).then(res=>{
       result = res.body
@@ -83,7 +83,7 @@ swissArmy = async(e) => {
     console.log(this.state.result)
     this.setLoader();
   }else if(this.state.mode === "PUT"){
-    this.setState({history: [ ...this.state.history, `${this.state.url}:${this.state.mode}:${this.state.body}`]})
+    this.setState({history: [ ...this.state.history, `${this.state.url}*${this.state.mode}*${this.state.body}`]})
     console.log("PUTTING")
     let result;
     await superagent.put(`${this.state.url}`).send(this.state.body).then(res=>{
@@ -100,7 +100,7 @@ swissArmy = async(e) => {
     this.setLoader();
   }
   else if(this.state.mode === "DELETE"){
-    this.setState({history: [ ...this.state.history, `${this.state.url}:${this.state.mode}:${this.state.body}`]})
+    this.setState({history: [ ...this.state.history, `${this.state.url}*${this.state.mode}*${this.state.body}`]})
     let result;
     await superagent.delete(`${this.state.url}`).send(this.state.body).then(res=>{
       result = ["Deleted"]
@@ -111,14 +111,17 @@ swissArmy = async(e) => {
   }
 }
 
-redo = (e) => {
-  // e.preventDefault();
-  console.log("SET REDO: ", e.target)
-  this.setState({url: e.target.linq, body: e.target.bod, mode: e.target.mode})
+// redo = (inp) => {
+//   console.log("SET REDO: ", inp)
+//   this.setState({url: `${inp.url}`, body: `${inp.body}`, mode: `${inp.mode}`})
 
 
+// }
+ redo =(e)=>{
+  e.preventDefault();
+  console.log("redoing? ", e)
+  this.setState({url: `${e.traget.value.url}`, body: `${e.traget.value.body}`, mode: `${e.traget.value.mode}`})
 }
-
 
     render(){
   return (

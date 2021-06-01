@@ -6,7 +6,6 @@ import { If, Then } from 'react-if';
 class Result extends React.Component {
 
     render(){
-        console.log(`RESULT:${this.props.result}`)
         return (
               <>
               <If condtion={this.props.loading}>
